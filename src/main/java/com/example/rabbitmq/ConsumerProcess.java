@@ -52,7 +52,32 @@ public class ConsumerProcess {
             }
         };
 
+        Consumer event = new DefaultConsumer(channel) {
+            @Override
+            public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
+                String event = envelope.getRoutingKey();
+                System.out.println(event);
+                System.out.println(consumerTag);
+                System.out.println(envelope);
+                System.out.println(properties);
+                System.out.println(new String(body));
+//                Map<String, Object> headers = properties.getHeaders();
+//                String name = headers.get("name").toString();
+//                String vhost = headers.get("vhost").toString();
+//
+//                if (event.equals("queue.created")) {
+//                    boolean durable = (Boolean) headers.get("durable");
+//                    String durableString = durable ? " (durable)" : " (transient)";
+//                    System.out.println("Created: " + name + " in " + vhost + durableString);
+//                }
+//                else /* queue.deleted is the only other possibility */ {
+//                    System.out.println("Deleted: " + name + " in " + vhost);
+//                }
+            }
+        };
+
 
         channel.basicConsume("webrtc",  true, consumer);
+        channel.basicConsume("event", true, event);
     }
 }
