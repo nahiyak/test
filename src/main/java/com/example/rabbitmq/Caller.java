@@ -27,7 +27,7 @@ public class Caller implements  Runnable {
      */
     @Override
     public void run() {
-        try(Connection connection = ConnectionUtils.newConnection(); Channel channel = connection.createChannel()){
+        try(Connection connection = ConnectionUtils.newConnection("localhost", 5672); Channel channel = connection.createChannel()){
             ConnectionUtils.setChannle(channel, userName, "caller", "webrtc", UUID.randomUUID().toString());
 
             Thread.sleep(360000);
@@ -38,7 +38,7 @@ public class Caller implements  Runnable {
 
     public static void main(String[] args)  {
 
-        for(int i = 1; i <=100; i++){
+        for(int i = 1; i <=1; i++){
             new Thread(new Caller("launcher" + i)).start();
         }
     }

@@ -10,13 +10,13 @@ import java.util.concurrent.TimeoutException;
 
 public class ConnectionUtils {
 
-    public static Connection newConnection(){
+    public static Connection newConnection(String host, int port){
         ConnectionFactory factory = new ConnectionFactory();
         factory.setUsername("myuser");
         factory.setPassword("mypass");
         factory.setVirtualHost("/");
-        factory.setHost("localhost");
-        factory.setPort(5672);
+        factory.setHost(host);
+        factory.setPort(port);
 
         try {
             return factory.newConnection();

@@ -26,7 +26,7 @@ public class Callee  implements Runnable{
      */
     @Override
     public void run() {
-        try (Connection connection = ConnectionUtils.newConnection(); Channel channel = connection.createChannel()) {
+        try (Connection connection = ConnectionUtils.newConnection("localhost", 5673); Channel channel = connection.createChannel()) {
             ConnectionUtils.setChannle(channel, userName, "callee", "webrtc", UUID.randomUUID().toString());
 
             Thread.sleep(360000);
@@ -36,7 +36,7 @@ public class Callee  implements Runnable{
     }
 
     public static void main(String[] args) {
-        for(int i = 1; i <=100; i++){
+        for(int i = 1; i <=1; i++){
             new Thread(new Callee("mplayer" + i)).start();
         }
     }

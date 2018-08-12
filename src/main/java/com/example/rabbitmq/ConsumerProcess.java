@@ -10,7 +10,7 @@ import java.util.Map;
 public class ConsumerProcess {
     public static void main(String[] args) throws IOException {
 
-        Connection connection =  ConnectionUtils.newConnection();
+        Connection connection =  ConnectionUtils.newConnection("localhost", 5674);
 
         Channel channel = connection.createChannel();
 
